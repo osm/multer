@@ -9,6 +9,7 @@ const kDisableDetection = Symbol('disableDetection')
 function parseLimit (limits, key, defaultValue) {
   const input = limits[key] == null ? defaultValue : limits[key]
   const value = bytes.parse(input)
+  if (value === Infinity) return value
   if (!Number.isFinite(value)) throw new Error(`Invalid limit "${key}" given: ${limits[key]}`)
   if (!Number.isInteger(value)) throw new Error(`Invalid limit "${key}" given: ${value}`)
   return value
